@@ -28,7 +28,7 @@
           {
             "name": "AzureCNINetworkMonitorImageURL",
             "type": "Microsoft.Common.TextBox",
-            "defaultdefaultValue": "containernetworking/networkmonitor:v0.0.4"
+            "defaultValue": "containernetworking/networkmonitor:v0.0.4"
           },
           {
             "name": "acsengineVersion",
@@ -586,7 +586,7 @@
             "defaultValue": ""
           },
           {
-            "name": "AzureCNINetworkMonitorImageURL",
+            "name": "orchestratorName",
             "type": "Microsoft.Common.TextBox",
             "defaultValue": "k8s"
           },
