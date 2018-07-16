@@ -1,0 +1,760 @@
+{
+  "handler": "Microsoft.Compute.MultiVm",
+  "version": "0.1.2-preview",
+  "parameters": {
+    "basics": [
+      {
+        "name": "acsEngineName",
+        "type": "Microsoft.Common.TextBox",
+        "label": "ACS Engine Cluster Name",
+        "defaultValue": "",
+        "constraints": {
+          "required": false,
+          "regex": "^[a-z0-9A-Z]{1,10}$",
+          "validationMessage": "Only letters and numbers are allowed, and the value must be 1-10 characters long."
+        }
+      }
+    ],
+    "steps": [
+      {
+        "name": "config",
+        "label": "settings",
+        "subLabel": {
+          "preValidation": "Configure settings",
+          "postValidation": "Done"
+        },
+        "bladeTitle": "Settings",
+        "elements": [
+          {
+            "name": "AzureCNINetworkMonitorImageURL",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "containernetworking/networkmonitor:v0.0.4"
+          },
+          {
+            "name": "acsengineVersion",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "canary"
+          },
+          {
+            "name": "agentpool1Count",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": 1
+          },
+          {
+            "name": "agentpool1Subnet",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "10.240.0.0/12"
+          },
+          {
+            "name": "agentpool1VMSize",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "Standard_D2_v2"
+          },
+          {
+            "name": "agentpool1osImageOffer",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "UbuntuServer"
+          },
+          {
+            "name": "agentpool1osImagePublisher",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "Canonical"
+          },
+          {
+            "name": "agentpool1osImageSKU",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "16.04-LTS"
+          },
+          {
+            "name": "agentpool1osImageVersion",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "16.04.201806220"
+          },
+          {
+            "name": "apiServerCertificate",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": ""
+          },
+          {
+            "name": "apiServerPrivateKey",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": ""
+          },
+          {
+            "name": "caCertificate",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": ""
+          },
+          {
+            "name": "caPrivateKey",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": ""
+          },
+          {
+            "name": "clientCertificate",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": ""
+          },
+          {
+            "name": "clientPrivateKey",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": ""
+          },
+          {
+            "name": "cloudProviderBackoff",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "false"
+          },
+          {
+            "name": "cloudProviderBackoffDuration",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "0"
+          },
+          {
+            "name": "cloudProviderBackoffExponent",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "0"
+          },
+          {
+            "name": "cloudProviderBackoffJitter",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "0"
+          },
+          {
+            "name": "cloudProviderBackoffRetries",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "0"
+          },
+          {
+            "name": "cloudProviderRatelimit",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "false"
+          },
+          {
+            "name": "cloudProviderRatelimitBucket",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "0"
+          },
+          {
+            "name": "cloudProviderRatelimitQPS",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "0"
+          },
+          {
+            "name": "cniPluginsURL",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "https://acs-mirror.azureedge.net/cni/cni-plugins-amd64-v0.7.1.tgz"
+          },
+          {
+            "name": "containerRuntime",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "docker"
+          },
+          {
+            "name": "dockerBridgeCidr",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "172.17.0.1/16"
+          },
+          {
+            "name": "dockerEngineDownloadRepo",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "https://aptdocker.azureedge.net/repo"
+          },
+          {
+            "name": "dockerEngineVersion",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "1.13.*"
+          },
+          {
+            "name": "etcdClientCertificate",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": ""
+          },
+          {
+            "name": "etcdClientPrivateKey",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": ""
+          },
+          {
+            "name": "etcdDiskSizeGB",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "256"
+          },
+          {
+            "name": "etcdDownloadURLBase",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "https://acs-mirror.azureedge.net/github-coreos"
+          },
+          {
+            "name": "etcdEncryptionKey",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": ""
+          },
+          {
+            "name": "etcdPeerCertificate0",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": ""
+          },
+          {
+            "name": "etcdPeerPrivateKey0",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": ""
+          },
+          {
+            "name": "etcdServerCertificate",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": ""
+          },
+          {
+            "name": "etcdServerPrivateKey",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": ""
+          },
+          {
+            "name": "etcdVersion",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "3.2.23"
+          },
+          {
+            "name": "firstConsecutiveStaticIP",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "10.255.255.5"
+          },
+          {
+            "name": "fqdnEndpointSuffix",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "cloudapp.azure.com"
+          },
+          {
+            "name": "gchighthreshold",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": 85
+          },
+          {
+            "name": "gclowthreshold",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": 80
+          },
+          {
+            "name": "generatorCode",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "acsengine"
+          },
+          {
+            "name": "kubeClusterCidr",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "10.240.0.0/12"
+          },
+          {
+            "name": "kubeConfigCertificate",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": ""
+          },
+          {
+            "name": "kubeConfigPrivateKey",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": ""
+          },
+          {
+            "name": "kubeDNSServiceIP",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "10.0.0.10"
+          },
+          {
+            "name": "kubeServiceCidr",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "10.0.0.0/16"
+          },
+          {
+            "name": "kubernetesACIConnectorCPULimit",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "50m"
+          },
+          {
+            "name": "kubernetesACIConnectorCPULimit",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "50m"
+          },
+          {
+            "name": "kubernetesACIConnectorEnabled",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": false
+          },
+          {
+            "name": "kubernetesACIConnectorMemoryLimit",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "150Mi"
+          },
+          {
+            "name": "kubernetesACIConnectorMemoryRequests",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "150Mi"
+          },
+          {
+            "name": "kubernetesACIConnectorNodeName",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "aci-connector"
+          },
+          {
+            "name": "kubernetesACIConnectorOS",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "Linux"
+          },
+          {
+            "name": "kubernetesACIConnectorRegion",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "westus"
+          },
+          {
+            "name": "kubernetesACIConnectorSpec",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "microsoft/virtual-kubelet:latest"
+          },
+          {
+            "name": "kubernetesACIConnectorTaint",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "azure.com/aci"
+          },
+          {
+            "name": "kubernetesAddonManagerSpec",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "k8s-gcrio.azureedge.net/kube-addon-manager-amd64:v8.6"
+          },
+          {
+            "name": "kubernetesAddonResizerSpec",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "k8s-gcrio.azureedge.net/addon-resizer:1.8.1"
+          },
+          {
+            "name": "kubernetesClusterAutoscalerAzureCloud",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "AzurePublicCloud"
+          },
+          {
+            "name": "kubernetesClusterAutoscalerCPULimit",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "100m"
+          },
+          {
+            "name": "kubernetesClusterAutoscalerCPURequests",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "100m"
+          },
+          {
+            "name": "kubernetesClusterAutoscalerEnabled",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": false
+          },
+          {
+            "name": "kubernetesClusterAutoscalerMaxNodes",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "5"
+          },
+          {
+            "name": "kubernetesClusterAutoscalerMemoryLimit",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "300Mi"
+          },
+          {
+            "name": "kubernetesClusterAutoscalerMemoryRequests",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "300Mi"
+          },
+          {
+            "name": "kubernetesClusterAutoscalerMinNodes",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "1"
+          },
+          {
+            "name": "kubernetesClusterAutoscalerSpec",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "k8s-gcrio.azureedge.net/cluster-autoscaler:v1.3.0"
+          },
+          {
+            "name": "kubernetesClusterAutoscalerUseManagedIdentity",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "true"
+          },
+          {
+            "name": "kubernetesDNSMasqSpec",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "k8s-gcrio.azureedge.net/k8s-dns-dnsmasq-nanny-amd64:1.14.10"
+          },
+          {
+            "name": "kubernetesDashboardCPULimit",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "300m"
+          },
+          {
+            "name": "kubernetesDashboardCPURequests",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "300m"
+          },
+          {
+            "name": "kubernetesDashboardMemoryLimit",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "150Mi"
+          },
+          {
+            "name": "kubernetesDashboardMemoryRequests",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "150Mi"
+          },
+          {
+            "name": "kubernetesDashboardSpec",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "k8s-gcrio.azureedge.net/kubernetes-dashboard-amd64:v1.8.3"
+          },
+          {
+            "name": "kubernetesExecHealthzSpec",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "k8s-gcrio.azureedge.net/exechealthz-amd64:1.2"
+          },
+          {
+            "name": "kubernetesHeapsterSpec",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "k8s-gcrio.azureedge.net/heapster-amd64:v1.5.3"
+          },
+          {
+            "name": "kubernetesHyperkubeSpec",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "k8s-gcrio.azureedge.net/hyperkube-amd64:v1.11.0"
+          },
+          {
+            "name": "kubernetesKubeDNSSpec",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "k8s-gcrio.azureedge.net/k8s-dns-kube-dns-amd64:1.14.10"
+          },
+          {
+            "name": "kubernetesKubeletClusterDomain",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "cluster.local"
+          },
+          {
+            "name": "kubernetesMetricsServerSpec",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "k8s-gcrio.azureedge.net/metrics-server-amd64:v0.2.1"
+          },
+          {
+            "name": "kubernetesNVIDIADevicePluginSpec",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "nvidia/k8s-device-plugin:1.11"
+          },
+          {
+            "name": "kubernetesNonMasqueradeCidr",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "10.240.0.0/12"
+          },
+          {
+            "name": "kubernetesOMSAgentCPULimit",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "150m"
+          },
+          {
+            "name": "kubernetesOMSAgentCPURequests",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "50m"
+          },
+          {
+            "name": "kubernetesOMSAgentMemoryLimit",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "500Mi"
+          },
+          {
+            "name": "kubernetesOMSAgentMemoryRequests",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "100Mi"
+          },
+          {
+            "name": "kubernetesPodInfraContainerSpec",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "k8s-gcrio.azureedge.net/pause-amd64:3.1"
+          },
+          {
+            "name": "kubernetesReschedulerCPULimit",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "10m"
+          },
+          {
+            "name": "kubernetesReschedulerCPURequests",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "10m"
+          },
+          {
+            "name": "kubernetesReschedulerMemoryLimit",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "100Mi"
+          },
+          {
+            "name": "kubernetesReschedulerMemoryRequests",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "100Mi"
+          },
+          {
+            "name": "kubernetesReschedulerSpec",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "k8s-gcrio.azureedge.net/rescheduler:v0.4.0"
+          },
+          {
+            "name": "kubernetesTillerCPULimit",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "50m"
+          },
+          {
+            "name": "kubernetesTillerCPURequests",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "50m"
+          },
+          {
+            "name": "kubernetesTillerMaxHistory",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "0"
+          },
+          {
+            "name": "kubernetesTillerMemoryLimit",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "150Mi"
+          },
+          {
+            "name": "kubernetesTillerMemoryRequests",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "150Mi"
+          },
+          {
+            "name": "kubernetesTillerSpec",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "gcrio.azureedge.net/kubernetes-helm/tiller:v2.8.1"
+          },
+          {
+            "name": "linuxAdminUsername",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": ""
+          },
+          {
+            "name": "location",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": ""
+          },
+          {
+            "name": "masterEndpointDNSNamePrefix",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": ""
+          },
+          {
+            "name": "masterSubnet",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "10.240.0.0/12"
+          },
+          {
+            "name": "masterVMSize",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "Standard_D2_v2"
+          },
+          {
+            "name": "networkPlugin",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "azure"
+          },
+          {
+            "name": "networkPolicy",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": ""
+          },
+          {
+            "name": "omsAgentDockerProviderVersion",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "2.0.0-3"
+          },
+          {
+            "name": "omsAgentImage",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "microsoft/oms:June21st"
+          },
+          {
+            "name": "omsAgentVersion",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "1.6.0-42"
+          },
+          {
+            "name": "omsAgentWorkspaceGuid",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": ""
+          },
+          {
+            "name": "omsAgentWorkspaceKey",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": ""
+          },
+          {
+            "name": "orchestratorName",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "k8s"
+          },
+          {
+            "name": "osImageOffer",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "UbuntuServer"
+          },
+          {
+            "name": "osImagePublisher",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "Canonical"
+          },
+          {
+            "name": "osImageSKU",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "16.04-LTS"
+          },
+          {
+            "name": "osImageVersion",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "16.04.201806220"
+          },
+          {
+            "name": "sshRSAPublicKey",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": ""
+          },
+          {
+            "name": "targetEnvironment",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "AzurePublicCloud"
+          },
+          {
+            "name": "vnetCniLinuxPluginsURL",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "https://acs-mirror.azureedge.net/cni/azure-vnet-cni-linux-amd64-v1.0.7.tgz"
+          },
+          {
+            "name": "vnetCniLinuxPluginsURL",
+            "type": "Microsoft.Common.TextBox",
+            "defaultValue": "https://acs-mirror.azureedge.net/cni/azure-vnet-cni-windows-amd64-v1.0.7.zip"
+          }
+        ]
+      }
+    ],
+    "outputs": {
+      "AzureCNINetworkMonitorImageURL": "[steps('config').AzureCNINetworkMonitorImageURL]",
+      "acsengineVersion": "[steps('config').acsengineVersion]",
+      "agentpool1Count": "[steps('config').agentpool1Count]",
+      "agentpool1Subnet": "[steps('config').agentpool1Subnet]",
+      "agentpool1VMSize": "[steps('config').agentpool1VMSize]",
+      "agentpool1osImageOffer": "[steps('config').agentpool1osImageOffer]",
+      "agentpool1osImagePublisher": "[steps('config').agentpool1osImagePublisher]",
+      "agentpool1osImageSKU": "[steps('config').agentpool1osImageSKU]",
+      "agentpool1osImageVersion": "[steps('config').agentpool1osImageVersion]",
+      "apiServerCertificate": "[steps('config').apiServerCertificate]",
+      "apiServerPrivateKey": "[steps('config').apiServerPrivateKey]",
+      "caCertificate": "[steps('config').caCertificate]",
+      "caPrivateKey": "[steps('config').caPrivateKey]",
+      "clientCertificate": "[steps('config').clientCertificate]",
+      "clientPrivateKey": "[steps('config').clientPrivateKey]",
+      "cloudProviderBackoff": "[steps('config').cloudProviderBackoff]",
+      "cloudProviderBackoffDuration": "[steps('config').cloudProviderBackoffDuration]",
+      "cloudProviderBackoffExponent": "[steps('config').cloudProviderBackoffExponent]",
+      "cloudProviderBackoffJitter": "[steps('config').cloudProviderBackoffJitter]",
+      "cloudProviderBackoffRetries": "[steps('config').cloudProviderBackoffRetries]",
+      "cloudProviderRatelimit": "[steps('config').cloudProviderRatelimit]",
+      "cloudProviderRatelimitBucket": "[steps('config').cloudProviderRatelimitBucket]",
+      "cloudProviderRatelimitQPS": "[steps('config').cloudProviderRatelimitQPS]",
+      "cniPluginsURL": "[steps('config').cniPluginsURL]",
+      "containerRuntime": "[steps('config').containerRuntime]",
+      "dockerBridgeCidr": "[steps('config').dockerBridgeCidr]",
+      "dockerEngineDownloadRepo": "[steps('config').dockerBridgeCidr]",
+      "dockerEngineVersion": "[steps('config').dockerEngineVersion]",
+      "etcdClientCertificate": "[steps('config').etcdClientCertificate]",
+      "etcdClientPrivateKey": "[steps('config').etcdClientPrivateKey]",
+      "etcdDiskSizeGB": "[steps('config').etcdClientPrivateKey]",
+      "etcdDownloadURLBase": "[steps('config').etcdDownloadURLBase]",
+      "etcdEncryptionKey": "[steps('config').etcdEncryptionKey]",
+      "etcdPeerCertificate0": "[steps('config').etcdPeerCertificate0]",
+      "etcdPeerPrivateKey0": "[steps('config').etcdPeerPrivateKey0]",
+      "etcdServerCertificate": "[steps('config').etcdServerCertificate]",
+      "etcdServerPrivateKey": "[steps('config').etcdServerPrivateKey]",
+      "etcdVersion": "[steps('config').etcdVersion]",
+      "firstConsecutiveStaticIP": "[steps('config').firstConsecutiveStaticIP]",
+      "fqdnEndpointSuffix": "[steps('config').fqdnEndpointSuffix]",
+      "gchighthreshold": "[steps('config').gchighthreshold]",
+      "gclowthreshold": "[steps('config').gclowthreshold]",
+      "generatorCode": "[steps('config').generatorCode]",
+      "kubeClusterCidr": "[steps('config').kubeClusterCidr]",
+      "kubeConfigCertificate": "[steps('config').kubeConfigCertificate]",
+      "kubeConfigPrivateKey": "[steps('config').kubeConfigPrivateKey]",
+      "kubeDNSServiceIP": "[steps('config').kubeDNSServiceIP]",
+      "kubeServiceCidr": "[steps('config').kubeServiceCidr]",
+      "kubernetesACIConnectorCPULimit": "[steps('config').kubernetesACIConnectorCPULimit]",
+      "kubernetesACIConnectorCPURequests": "[steps('config').kubernetesACIConnectorCPURequests]",
+      "kubernetesACIConnectorEnabled": "[steps('config').kubernetesACIConnectorEnabled]",
+      "kubernetesACIConnectorMemoryLimit": "[steps('config').kubernetesACIConnectorMemoryLimit]",
+      "kubernetesACIConnectorMemoryRequests": "[steps('config').kubernetesACIConnectorMemoryRequests]",
+      "kubernetesACIConnectorNodeName": "[steps('config').kubernetesACIConnectorNodeName]",
+      "kubernetesACIConnectorOS": "[steps('config').kubernetesACIConnectorOS]",
+      "kubernetesACIConnectorRegion": "[steps('config').kubernetesACIConnectorRegion]",
+      "kubernetesACIConnectorSpec": "[steps('config').kubernetesACIConnectorSpec]",
+      "kubernetesACIConnectorTaint": "[steps('config').kubernetesACIConnectorTaint]",
+      "kubernetesAddonManagerSpec": "[steps('config').kubernetesAddonManagerSpec]",
+      "kubernetesAddonResizerSpec": "[steps('config').kubernetesAddonResizerSpec]",
+      "kubernetesClusterAutoscalerAzureCloud": "[steps('config').kubernetesClusterAutoscalerAzureCloud]",
+      "kubernetesClusterAutoscalerCPULimit": "[steps('config').kubernetesClusterAutoscalerCPULimit]",
+      "kubernetesClusterAutoscalerCPURequests": "[steps('config').kubernetesClusterAutoscalerCPURequests]",
+      "kubernetesClusterAutoscalerEnabled": "[steps('config').kubernetesClusterAutoscalerEnabled]",
+      "kubernetesClusterAutoscalerMaxNodes": "[steps('config').kubernetesClusterAutoscalerMaxNodes]",
+      "kubernetesClusterAutoscalerMemoryLimit": "[steps('config').kubernetesClusterAutoscalerMemoryLimit]",
+      "kubernetesClusterAutoscalerMemoryRequests": "[steps('config').kubernetesClusterAutoscalerMemoryRequests]",
+      "kubernetesClusterAutoscalerMinNodes": "[steps('config').kubernetesClusterAutoscalerMinNodes]",
+      "kubernetesClusterAutoscalerSpec": "[steps('config').kubernetesClusterAutoscalerSpec]",
+      "kubernetesClusterAutoscalerUseManagedIdentity": "[steps('config').kubernetesClusterAutoscalerUseManagedIdentity]",
+      "kubernetesDNSMasqSpec": "[steps('config').kubernetesDNSMasqSpec]",
+      "kubernetesDashboardCPULimit": "[steps('config').kubernetesDashboardCPULimit]",
+      "kubernetesDashboardCPURequests": "[steps('config').kubernetesDashboardCPURequests]",
+      "kubernetesDashboardMemoryLimit": "[steps('config').kubernetesDashboardMemoryLimit]",
+      "kubernetesDashboardMemoryRequests": "[steps('config').kubernetesDashboardMemoryRequests]",
+      "kubernetesDashboardSpec": "[steps('config').kubernetesDashboardSpec]",
+      "kubernetesExecHealthzSpec": "[steps('config').kubernetesExecHealthzSpec]",
+      "kubernetesHeapsterSpec": "[steps('config').kubernetesHeapsterSpec]",
+      "kubernetesHyperkubeSpec": "[steps('config').kubernetesHyperkubeSpec]",
+      "kubernetesKubeDNSSpec": "[steps('config').kubernetesKubeDNSSpec]",
+      "kubernetesKubeletClusterDomain": "[steps('config').kubernetesKubeletClusterDomain]",
+      "kubernetesMetricsServerSpec": "[steps('config').kubernetesMetricsServerSpec]",
+      "kubernetesNVIDIADevicePluginSpec": "[steps('config').kubernetesNVIDIADevicePluginSpec]",
+      "kubernetesNonMasqueradeCidr": "[steps('config').kubernetesNonMasqueradeCidr]",
+      "kubernetesOMSAgentCPULimit": "[steps('config').kubernetesOMSAgentCPULimit]",
+      "kubernetesOMSAgentCPURequests": "[steps('config').kubernetesOMSAgentCPURequests]",
+      "kubernetesOMSAgentMemoryLimit": "[steps('config').kubernetesOMSAgentMemoryLimit]",
+      "kubernetesOMSAgentMemoryRequests": "[steps('config').kubernetesOMSAgentMemoryRequests]",
+      "kubernetesPodInfraContainerSpec": "[steps('config').kubernetesPodInfraContainerSpec]",
+      "kubernetesReschedulerCPULimit": "[steps('config').kubernetesReschedulerCPULimit]",
+      "kubernetesReschedulerCPURequests": "[steps('config').kubernetesReschedulerCPURequests]",
+      "kubernetesReschedulerMemoryLimit": "[steps('config').kubernetesReschedulerMemoryLimit]",
+      "kubernetesReschedulerMemoryRequests": "[steps('config').kubernetesReschedulerMemoryRequests]",
+      "kubernetesReschedulerSpec": "[steps('config').kubernetesReschedulerSpec]",
+      "kubernetesTillerCPULimit": "[steps('config').kubernetesTillerCPULimit]",
+      "kubernetesTillerCPURequests": "[steps('config').kubernetesTillerCPURequests]",
+      "kubernetesTillerMaxHistory": "[steps('config').kubernetesTillerMaxHistory]",
+      "kubernetesTillerMemoryLimit": "[steps('config').kubernetesTillerMemoryLimit]",
+      "kubernetesTillerMemoryRequests": "[steps('config').kubernetesTillerMemoryRequests]",
+      "kubernetesTillerSpec": "[steps('config').kubernetesTillerSpec]",
+      "linuxAdminUsername": "[steps('config').linuxAdminUsername]",
+      "location": "[location()]",
+      "masterEndpointDNSNamePrefix": "[steps('config').masterEndpointDNSNamePrefix]",
+      "masterSubnet": "[steps('config').masterSubnet]",
+      "masterVMSize": "[steps('config').masterVMSize]",
+      "networkPlugin": "[steps('config').networkPlugin]",
+      "networkPolicy": "[steps('config').networkPolicy]",
+      "omsAgentDockerProviderVersion": "[steps('config').omsAgentDockerProviderVersion]",
+      "omsAgentImage": "[steps('config').omsAgentImage]",
+      "omsAgentVersion": "[steps('config').omsAgentVersion]",
+      "omsAgentWorkspaceGuid": "[steps('config').omsAgentWorkspaceGuid]",
+      "omsAgentWorkspaceKey": "[steps('config').omsAgentWorkspaceKey]",
+      "orchestratorName": "[steps('config').orchestratorName]",
+      "osImageOffer": "[steps('config').osImageOffer]",
+      "osImagePublisher": "[steps('config').osImagePublisher]",
+      "osImageSKU": "[steps('config').osImageSKU]",
+      "osImageVersion": "[steps('config').osImageVersion]",
+      "sshRSAPublicKey": "[steps('config').sshRSAPublicKey]",
+      "targetEnvironment": "[steps('config').targetEnvironment]",
+      "vnetCniLinuxPluginsURL": "[steps('config').vnetCniLinuxPluginsURL]",
+      "vnetCniWindowsPluginsURL": "[steps('config').vnetCniWindowsPluginsURL]"
+    }
+  }
+}
