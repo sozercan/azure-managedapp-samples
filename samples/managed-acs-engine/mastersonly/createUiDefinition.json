@@ -4,14 +4,14 @@
   "parameters": {
     "basics": [
       {
-        "name": "acsEngineName",
+        "name": "masterEndpointDNSNamePrefix",
         "type": "Microsoft.Common.TextBox",
         "label": "ACS Engine Cluster Name",
-        "defaultValue": "",
+        "defaultValue": "sertack8smanaged1",
         "constraints": {
-          "required": false,
-          "regex": "^[a-z0-9A-Z]{1,10}$",
-          "validationMessage": "Only letters and numbers are allowed, and the value must be 1-10 characters long."
+          "required": "true",
+          "regex": "^[a-z0-9A-Z]{1,30}$",
+          "validationMessage": "Only letters and numbers are allowed, and the value must be 1-30 characters long."
         }
       }
     ],
@@ -736,7 +736,7 @@
       "kubernetesTillerSpec": "[steps('config').kubernetesTillerSpec]",
       "linuxAdminUsername": "[steps('config').linuxAdminUsername]",
       "location": "[location()]",
-      "masterEndpointDNSNamePrefix": "[steps('config').masterEndpointDNSNamePrefix]",
+      "masterEndpointDNSNamePrefix": "[basics('masterEndpointDNSNamePrefix')]",
       "masterSubnet": "[steps('config').masterSubnet]",
       "masterVMSize": "[steps('config').masterVMSize]",
       "networkPlugin": "[steps('config').networkPlugin]",
