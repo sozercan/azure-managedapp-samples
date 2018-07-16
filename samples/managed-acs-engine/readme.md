@@ -21,4 +21,14 @@ az managedapp definition create \
   --package-file-uri "https://github.com/sozercan/azure-managedapp-samples/raw/acsengine/samples/managed-acs-engine/managedacsengine.zip"
 ```
 
+az managedapp create \
+  --name managedACSEngine \
+  --location <rgLocation> \
+  --kind "Servicecatalog" \
+  --resource-group <yourRgName> \
+  --managedapp-definition-id $appid \
+  --managed-rg-id $managedGroupId \
+  --parameters "samples/managed-acs-engine/azuredeploy.parameters.json"
+
+
 ![alt text](images/appliance.png "Azure Managed Application")
