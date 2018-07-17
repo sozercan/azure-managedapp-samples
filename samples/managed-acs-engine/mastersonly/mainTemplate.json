@@ -1710,6 +1710,7 @@
     "useManagedIdentityExtension": "true",
     "username": "[parameters('linuxAdminUsername')]",
     "virtualNetworkName": "[concat(variables('orchestratorName'), '-vnet-', variables('nameSuffix'))]",
+    "agentVirtualNetworkName": "[concat(variables('orchestratorName'), '-agentvnet-', variables('nameSuffix'))]",
     "virtualNetworkResourceGroupName": "''",
     "vmType": "vmss",
     "vnetCidr": "[parameters('vnetCidr')]",
@@ -1761,13 +1762,16 @@
           "type": "virtualNetworkPeerings",
           "name": "vnetpeering",
           "location": "[variables('location')]",
+          "dependsOn": [
+            "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]"
+          ],
           "properties": {
             "allowVirtualNetworkAccess": "true",
             "allowForwardedTraffic": "true",
             "allowGatewayTransit": "false",
             "useRemoteGateways": "false",
             "remoteVirtualNetwork": {
-              "id": "[resourceId('Microsoft.Network/virtualNetworks',parameters('agentVirtualNetworkName'))]"
+              "id": "[concat('/subscriptions/8ecadfc9-d1a3-4ea4-b844-0d9f87e4d7c8/resourceGroups/sertac-managedk8s-agents/providers/Microsoft.Network/virtualNetworks/',variables('agentVirtualNetworkName'))]"
             }
           }
         }
