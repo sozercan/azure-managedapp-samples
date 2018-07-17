@@ -1755,6 +1755,23 @@
           }
         ]
       },
+      "resources": [
+        {
+          "apiVersion": "2016-06-01",
+          "type": "virtualNetworkPeerings",
+          "name": "vnetpeering",
+          "location": "[variables('location')]",
+          "properties": {
+            "allowVirtualNetworkAccess": "true",
+            "allowForwardedTraffic": "true",
+            "allowGatewayTransit": "false",
+            "useRemoteGateways": "false",
+            "remoteVirtualNetwork": {
+              "id": "[resourceId('Microsoft.Network/virtualNetworks',parameters('agentVirtualNetworkName'))]"
+            }
+          }
+        }
+      ],
       "type": "Microsoft.Network/virtualNetworks"
     },
     {
